@@ -487,10 +487,7 @@ input[type=number] {
     border-radius: 20px;
     grid-template-rows: 0.5fr 1.5fr 1fr 0.3fr 0.5fr;
     grid-template-columns: 1fr;
-    border: 2px solid red;
-}
-
-.book-card-area {
+    border: 2px solid black;
 }
 
 .book-card-edit-buttons {
@@ -515,6 +512,10 @@ input[type=number] {
     border-left: none;
     border-top: none;
     border-right: none;
+}
+
+.edit:hover, .remove:hover {
+    cursor: pointer;
 }
 
 .edit i, .remove i {
@@ -566,6 +567,10 @@ input[type=number] {
 
 .book-card-buttons button {
     background-color: white;
+}
+
+.book-card-buttons button:hover {
+    cursor: pointer;
 }
 
 .book-card-buttons button i {

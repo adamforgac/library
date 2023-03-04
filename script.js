@@ -49,7 +49,6 @@ const labelTotal = document.querySelector(".text-pole3 label");
 inputTotal.addEventListener("focus", function() {
     labelTotal.style.top = labelPercentageFocus;
     colorChange(labelTotal);
-
 })
 
 inputTotal.addEventListener("blur", function() {
@@ -152,6 +151,17 @@ submitButton.addEventListener("click", function(event) {
     }
 
     bookForm.style.top = "-150%"; 
+
+    allInputs.forEach((input) => {
+        input.value = "";
+    })
+
+    allLabels.forEach((label) => {
+        returnColor(label);
+        label.style.top = labelPercentageNormal;
+    })
+
+    checkbox.checked = false;
 })
 
 
@@ -167,10 +177,34 @@ function Book(title, author, totalPages, completedPages, bookDone) {
 function addToLibrary(title, author, totalPages, completedPages, bookDone) {
     myLibrary.push(new Book(title, author, totalPages, completedPages, bookDone))
 
-    loopThroughtArray()
+    loopThroughtArray(myLibrary.length);
+    console.log(myLibrary)
 }
 
 
+// REMOVE BUTTON
+
+const wholeDoc = document.addEventListener("click", function(e) {
+    if(e.target.className === "remove" || e.target.className === "fa-solid fa-trash") {
+        const targeted = e.target;
+        removeCard(targeted);
+    }
+
+    
+})
+
+
+function removeCard(element) {
+    const dataNum = element.getAttribute("data-card");
+    const allBookCards = document.querySelectorAll(".book-card");
+    allBookCards.forEach(card => {
+        if(card.getAttribute("data-card") === dataNum) {
+            card.remove();
+        }
+    })
+    myLibrary.splice(dataNum, 1);
+    console.log(myLibrary)
+}
 
 
 // TEST CODE 
@@ -182,26 +216,25 @@ const paragraphElement = document.createElement("p");
 const headingElement = document.createElement("h2");
 
 
-function loopThroughtArray() {
-    for(let i = 0; i <= myLibrary.length-1; i++) {
-        console.log(myLibrary[i]);
+function loopThroughtArray(num) {
+
+    for(let i = num-1; i <= myLibrary.length-1; i++) {
 
         // CREATE BOOK CARD
 
-        library.appendChild(divElement).setAttribute("data-card", [i]);
-        const currentCard = document.querySelector(`[data-card = "${i}"]`);
-        currentCard.classList.add("book-card");
-        currentCard.appendChild(document.createElement("div")).classList.add("book-card-edit-buttons");
-        currentCard.appendChild(document.createElement("div")).classList.add("book-card-name");
-        currentCard.appendChild(document.createElement("div")).classList.add("book-card-author");
-        currentCard.appendChild(document.createElement("div")).classList.add("book-card-buttons");
-        currentCard.appendChild(document.createElement("div")).classList.add("book-card-stats");
+        const mainDiv = library.appendChild(document.createElement("div"));
+        mainDiv.classList.add("book-card");
+        mainDiv.appendChild(document.createElement("div")).classList.add("book-card-edit-buttons");
+        mainDiv.appendChild(document.createElement("div")).classList.add("book-card-name");
+        mainDiv.appendChild(document.createElement("div")).classList.add("book-card-author");
+        mainDiv.appendChild(document.createElement("div")).classList.add("book-card-buttons");
+        mainDiv.appendChild(document.createElement("div")).classList.add("book-card-stats");
 
 
         // CREATE EDIT BUTTONS
 
 
-        const currentEditButtons = currentCard.querySelector(".book-card-edit-buttons");
+        const currentEditButtons = mainDiv.querySelector(".book-card-edit-buttons");
         currentEditButtons.appendChild(document.createElement("button")).classList.add("edit");
         currentEditButtons.appendChild(document.createElement("button")).classList.add("remove");
         const editButton = currentEditButtons.querySelector(".edit");
@@ -213,7 +246,7 @@ function loopThroughtArray() {
         // CREATE NAME OF THE BOOK
 
         
-        const bookName = currentCard.querySelector(".book-card-name");
+        const bookName = mainDiv.querySelector(".book-card-name");
         bookName.appendChild(document.createElement("h2")).classList.add("book-card-name-detail", "text");
         const bookNameHeading = bookName.querySelector(".book-card-name-detail");
         bookNameHeading.textContent = myLibrary[i].title;
@@ -222,7 +255,7 @@ function loopThroughtArray() {
         // CREATE AUTHOR OF THE BOOK
 
 
-        const bookAuthor = currentCard.querySelector(".book-card-author");
+        const bookAuthor = mainDiv.querySelector(".book-card-author");
         bookAuthor.appendChild(document.createElement("p")).classList.add("book-card-author-detail", "text");
         const bookAuthorHeading = bookAuthor.querySelector(".book-card-author-detail");
         bookAuthorHeading.textContent = myLibrary[i].author;
@@ -231,7 +264,7 @@ function loopThroughtArray() {
         // CREATE NAME OF THE BOOK
 
 
-        const currentButtons = currentCard.querySelector(".book-card-buttons");
+        const currentButtons = mainDiv.querySelector(".book-card-buttons");
         currentButtons.appendChild(document.createElement("button")).classList.add("minus");
         currentButtons.appendChild(document.createElement("button")).classList.add("tick");
         currentButtons.appendChild(document.createElement("button")).classList.add("plus");
@@ -246,7 +279,7 @@ function loopThroughtArray() {
         // CREATE BOOK STATS
 
 
-        const bookStats = currentCard.querySelector(".book-card-stats");
+        const bookStats = mainDiv.querySelector(".book-card-stats");
         bookStats.appendChild(document.createElement("p")).classList.add("book-card-stat-read");
         bookStats.appendChild(document.createElement("p")).classList.add("info-icon");
         bookStats.appendChild(document.createElement("p")).classList.add("book-card-stat-total");
@@ -256,8 +289,30 @@ function loopThroughtArray() {
         bookRead.textContent = myLibrary[i].completedPages;
         const bookTotal = bookStats.querySelector(".book-card-stat-total");
         bookTotal.textContent = myLibrary[i].totalPages;
+
+        addAttribute()
+
+    }
+
+    // ADDS DATA ATTRIBUTES TO ALL ELEMENTS IN BOOK-CARD AND TO BOOK-CARD
+
+    function addAttribute() {
+        const allBookCards = library.querySelectorAll(".book-card");
+    
+
+        for(let i = 0; i <= allBookCards.length-1; i++) {
+            allBookCards[i].setAttribute("data-card", [i]);
+            const allBookCardsChildren = allBookCards[i].querySelectorAll(".book-card div, .book-card button, .book-card p, .book-card i, .book-card h2")
+    
+            allBookCardsChildren.forEach(child => {
+                child.setAttribute("data-card", [i]);
+            })
+        }
     }
 }
+
+
+
 
 
 
