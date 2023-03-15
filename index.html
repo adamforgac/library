@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="queries.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
@@ -22,6 +24,12 @@
         <div class="banner">
             <div class="main-heading">
                 <img src="images/logo3.png" alt="">
+            </div>
+        
+            <div class="delete-button">
+                <button class="delete">
+                    DELETE ALL
+                </button>
             </div>
         </div>
 
@@ -75,19 +83,75 @@
             </div>
         </div>
 
+
+
+
+        <div class="book-form-edit">
+            <div class="book-form-layout-edit">
+                <div class="book-form-heading-edit">
+                    <h2>Edit book</h2>
+                </div>
+    
+                <div class="book-form-only-edit">
+                    <form id="whole-book-form-edit" action="">
+                        <div class="text-pole1-edit pole-edit">
+                            <label class="text-label-edit" for="book_title_edit">Title</label>
+                            <input onfocus="" id="book_title_edit" type="text" autocomplete="off" required maxlength="40">
+                        </div>
+    
+                        <div class="text-pole2-edit pole-edit">
+                            <label class="text-label-edit" for="book-author-edit">Author</label>
+                            <input id="book-author-edit" onfocus="" type="text" autocomplete="off" required maxlength="40">
+                        </div>
+    
+                        <div class="text-pole3-edit pole-edit">
+                            <label class="text-label-edit" for="total_pages_edit">Total pages</label>
+                            <input id="total_pages_edit" onfocus="" type="number" autocomplete="off" required min="1" max="999999">
+                        </div>
+    
+                        <div class="text-pole4-edit pole-edit">
+                            <label class="text-label-edit" for="completed_pages_edit">Completed pages</label>
+                            <input id="completed_pages_edit" onfocus="" type="number" autocomplete="off" required>
+                        </div>
+
+                        <div class="text-pole5-edit">
+                            <label class="text-label-edit" for="completed_pages_edit">Read the whole book?</label>
+                            <label class="switch-edit">
+                                <input type="checkbox">
+                                <span class="slider-edit round-edit"></span>
+                            </label>
+                        </div>
+                    </form> 
+                </div>
+
+                <div class="book-form-buttons-edit">
+                    <div class="book-form-cancel-edit">
+                        <button><i class="fa-solid fa-circle-xmark"></i></button>
+                    </div>
+
+                    <div class="book-form-confirm-edit">
+                        <button type="submit" form="whole-book-form-edit"><i class="fa-solid fa-circle-check"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
         <div class="library">
             <div class="add-new-book">
                 <p>+</p>
             </div>
+
+            <div class="menu-icons">
+                <div class="right" class="arrow-right"><i class="fa-solid fa-angles-right"></i></div>
+    
+                <div class="left" class="arrow-left"><i class="fa-solid fa-angles-left"></i></div>
+            </div>
         </div>
 
         <div class="menu">
-            <div class="delete-button">
-                <button class="delete">
-                    DELETE ALL
-                </button>
-            </div>
-
             <div class="books-information">
                 <div class="books-text-info">
                     <div class="heading-info">
@@ -100,7 +164,7 @@
                         </div>
 
                         <div class="book-stat">
-                            <p class="stat-only-total-books">0</p>
+                            <p class="stat-only-total-books stat-for-all">0</p>
                         </div>
                     </div>
 
@@ -110,7 +174,7 @@
                         </div>
 
                         <div class="book-stat">
-                            <p class="stat-only-completed-books">0</p>
+                            <p class="stat-only-completed-books stat-for-all">0</p>
                         </div>
                     </div>
 
@@ -120,7 +184,7 @@
                         </div>
 
                         <div class="book-stat">
-                            <p class="stat-only-total-pages">0</p>
+                            <p class="stat-only-total-pages stat-for-all">0</p>
                         </div>
                     </div>
 
@@ -130,7 +194,7 @@
                         </div>
 
                         <div class="book-stat">
-                            <p class="stat-only-completed-pages">0</p>
+                            <p class="stat-only-completed-pages stat-for-all">0</p>
                         </div>
                     </div>
                 </div>
@@ -145,6 +209,10 @@
                     <img src="images/logo-black.svg" alt="">
                 </div>
             </div>
+
+            <!-- <div class="empty">
+
+            </div> -->
         </div>
     </div>
 </body>

@@ -1,0 +1,345 @@
+
+@media only screen and (max-width: 1360px) {
+    .books-information {
+        width: 300px;
+    }
+
+    .wrapper {
+        grid-template-columns: 3fr 300px;
+    }
+
+    .banner {
+        grid-template-columns: 1fr 300px;
+    }
+}
+
+@media only screen and (max-width: 1030px) {
+    .books-information {
+        padding-bottom: 100px;
+        height: 92vh;
+    }
+}
+
+@media only screen and (max-width: 870px) {
+    .menu {
+        position: fixed;
+        left: -130%;
+        transition: 1s;
+    }
+
+    .books-information {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+
+    .left {
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        display: none;
+    }
+    
+    .right {
+        top: 50%;
+        left: 20%;
+        position: absolute;
+    }
+
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-icons {
+        display: unset;
+    }
+
+    .left i, .right i {
+        font-size: 1.6rem;
+        color: black;
+    }
+
+    .mobile {
+        left: 35px;
+    }
+
+    .main-heading img {
+        width: 200px;
+    }
+
+    .delete-button button {
+        height: 36px;
+        width: 130px;
+    }
+
+    .book-image img {
+        width: 250px;
+    }
+    
+}
+
+@media only screen and (max-width: 550px) {
+    .main-heading {
+        margin-left: 30px;
+        width: 150px;
+    }
+
+    .delete-button {  
+        justify-content: flex-end;
+        margin-right: 30px;
+    }
+
+    .delete-button button {
+        height: 33px;
+        border-radius: 10px;
+        border: none;
+        background-color: var(--constrast-color);
+        color: white;
+        width: 120px;
+        font-size: 0.8rem;
+    }
+
+    .main-heading img {
+        width: 150px;
+    }
+
+    .banner {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .books-information {
+        padding-bottom: 80px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .menu {
+        left: -100%;
+    }
+
+    .mobile {
+        left: 10%;
+        transform: translateX(-50%);
+    }
+
+    .main-heading {
+        margin-left: 15px;
+        width: 110px;
+    }
+
+    .delete-button {  
+        justify-content: flex-end;
+        margin-right: 15px;
+    }
+
+    .delete-button button {
+        height: 26px;
+        border-radius: 10px;
+        border: none;
+        background-color: var(--constrast-color);
+        color: white;
+        width: 90px;
+        font-size: 0.6rem;
+    }
+
+    .main-heading img {
+        width: 110px;
+    }
+}
+
+@media only screen and (max-width: 355px) {
+    .books-information {
+        width: 230px;
+    }
+
+    .mobile {
+        left: 12%;
+    }
+
+    .book-image img {
+        transform: translateX(-50%);
+        position: absolute;
+        width: 200px;
+        margin-top: 30px;
+    }
+
+    .logo img {
+        width: 120px;
+    }
+
+    .heading-info h2 {
+        font-size: 1.3rem;
+    }
+
+    .book-text p {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .library {
+        padding: 40px;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+@media only screen and (max-height: 730px) {
+    .book-image img {
+        width: 220px;
+    } 
+
+    .heading-info h2 {
+        font-size: 1.4rem;
+    }
+
+    .book-text p {
+        font-size: 1rem;
+    }
+
+    .book-stat p {
+        font-size: 1.2rem;
+    }
+
+    .logo img {
+        width: 100px;
+    }
+
+    .banner {
+        height: 80px;
+    }
+
+    .books-information {
+        margin-top: 80px;
+    }
+}
+
+@media only screen and (max-height: 560px) {
+    .book-image img {
+        width: 150px;
+    } 
+
+    .heading-info h2 {
+        font-size: 1.2rem;
+    }
+
+    .book-text p {
+        font-size: 0.9rem;
+    }
+
+    .book-stat p {
+        font-size: 1.1rem;
+    }
+
+    .logo img {
+        width: 100px;
+    }
+
+    .banner {
+        height: 80px;
+    }
+
+    .books-information {
+        margin-top: 80px;
+        row-gap: 10px;
+    }
+
+    .books-text-info {
+        
+    }
+}
+
+@media only screen and (max-height: 520px) {
+    .book-image img {
+        width: 130px;
+        margin-top: 20px;
+    } 
+
+    .heading-info h2 {
+        font-size: 1.15rem;
+    }
+
+    .book-text p {
+        font-size: 0.9rem;
+    }
+
+    .book-stat p {
+        font-size: 1rem;
+    }
+
+    .logo img {
+        width: 70px;
+    }
+
+    .banner {
+        height: 80px;
+    }
+
+    .books-information {
+        margin-top: 80px;
+        row-gap: 0px;
+    }
+
+    .books-information {
+        width: 230px;
+        height: 84vh;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    .book-form {
+        top: -200%;
+    }
+}
+
+
+/* FORM  */
+
+
+@media only screen and (max-width: 720px) {
+    .book-form-only form {
+        display: grid;
+        grid-template-rows: repeat(5, 1fr);
+        padding: 40px 20px;
+        row-gap: 35px;
+    }
+
+    .switch {
+        display: none;
+    }
+
+    .text-pole5 {
+        display: none;
+    }
+
+    .book-form-only form {
+        grid-template-rows: repeat(4, 1fr);
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .book-form-layout {
+        width: 100%;
+    }
+
+    .book-form {
+        padding: 10px;
+    }
+
+    .book-form-layout {
+        grid-template-rows: 1fr 4fr 0.8fr;
+    }
+
+}
+
+@media only screen and (max-width: 320px) {
+    .book-form {
+        height: 100%;
+    }
+
+    .book-form-heading h2 {
+        font-size: 1.7rem;
+    }
+    .book-form-buttons button i {
+        font-size: 1.5rem;
+    }
+}
+
