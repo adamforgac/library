@@ -786,15 +786,16 @@ input[type=number] {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 10px;
+    padding: 10px;
     grid-row: 2 / 3;
+    word-break: break-all;
 }
 
 .book-card-name-detail {
     color: white;
     font-family: 'Libre Baskerville', serif;
-    font-size: 1.5rem;
-    padding-left: 10px;
+    font-size: 1.25rem;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -804,15 +805,16 @@ input[type=number] {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 10px;
+    padding: 10px;
     background-color: white;
+    word-break: break-all;
 }
 
 .book-card-author-detail {
     color: black;
     font-family: 'Libre Baskerville', serif;
     font-style: italic;
-    padding-left: 10px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: flex-start;

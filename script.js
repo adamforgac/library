@@ -165,28 +165,32 @@ submitButton.addEventListener("click", function(event) {
         bookCompleted = false;
     }
 
-    if(inputTitle.value === "" || inputAuthor.value === "" || inputTotal.value === "" || inputCompleted.value === "") {
-        false;
+    if(Number(document.querySelector(".text-pole3 input").value) < Number(document.querySelector(".text-pole4 input").value)) {
+        alert("You cannot read more pages than the book has");
     } else {
-        addToLibrary(inputTitle.value, inputAuthor.value, inputTotal.value, inputCompleted.value, bookCompleted);
-
-        let totalDisplay = Number(document.querySelector(".stat-only-total-pages").textContent);
-        let totalForm = Number(document.querySelector(".text-pole3 input").value);
-        let totalValue = totalDisplay + totalForm;
-        document.querySelector(".stat-only-total-pages").textContent = totalValue;
-
-        let completedDisplay = Number(document.querySelector(".stat-only-completed-pages").textContent);
-        let completedForm = Number(document.querySelector(".text-pole4 input").value);
-        let completedValue = completedDisplay + completedForm;
-        document.querySelector(".stat-only-completed-pages").textContent = completedValue;
-
-        const totalBooksStat = Number(document.querySelector(".stat-only-total-books").textContent)
-        const totalBooksStatPlus = totalBooksStat + 1;
-        document.querySelector(".stat-only-total-books").textContent = totalBooksStatPlus;
-
-
-
-        removeForm();
+        if(inputTitle.value === "" || inputAuthor.value === "" || inputTotal.value === "" || inputCompleted.value === "") {
+            false;
+        } else {
+            addToLibrary(inputTitle.value, inputAuthor.value, inputTotal.value, inputCompleted.value, bookCompleted);
+    
+            let totalDisplay = Number(document.querySelector(".stat-only-total-pages").textContent);
+            let totalForm = Number(document.querySelector(".text-pole3 input").value);
+            let totalValue = totalDisplay + totalForm;
+            document.querySelector(".stat-only-total-pages").textContent = totalValue;
+    
+            let completedDisplay = Number(document.querySelector(".stat-only-completed-pages").textContent);
+            let completedForm = Number(document.querySelector(".text-pole4 input").value);
+            let completedValue = completedDisplay + completedForm;
+            document.querySelector(".stat-only-completed-pages").textContent = completedValue;
+    
+            const totalBooksStat = Number(document.querySelector(".stat-only-total-books").textContent)
+            const totalBooksStatPlus = totalBooksStat + 1;
+            document.querySelector(".stat-only-total-books").textContent = totalBooksStatPlus;
+    
+    
+    
+            removeForm();
+    }
     }
 })
 
@@ -223,13 +227,6 @@ function addToLibrary(title, author, totalPages, completedPages, bookDone) {
 
 
 // REMOVE BUTTON
-
-
-// PROBLEM START
-// PROBLEM START
-// PROBLEM START
-// PROBLEM START
-// PROBLEM START
 
 
 const wholeDoc = document.addEventListener("click", function(e) {
@@ -273,9 +270,11 @@ function editCard(value) {
             formBookCompleted.value = completedPages.textContent;
             formBookTotal.value = totalPages.textContent;
 
+
             // FORM ANIMATIONS
             // FORM ANIMATIONS
             // FORM ANIMATIONS
+
 
             const labelPercentageFocusEdit = "-20%";
             const labelPercentageNormalEdit = "32%";
@@ -291,9 +290,11 @@ function editCard(value) {
             const submitButtonEdit = document.querySelector(".book-form-confirm-edit button");
             const checkboxEdit = document.querySelector(".text-pole5-edit input");
 
+
             // CANCEL BUTTON
             // CANCEL BUTTON
             // CANCEL BUTTON
+
 
             cancelButtonEdit.addEventListener("click", function() {
                 bookFormEdit.style.top = "-200%"; 
@@ -391,7 +392,9 @@ function editCard(value) {
                 }
             })
 
+
             // CHECKBOX
+
 
             checkboxEdit.addEventListener("click", function() {
                 if(checkboxEdit.checked) {
@@ -414,9 +417,11 @@ function editCard(value) {
                 }
             })
 
+
             // SUBMIT BUTTON
             // SUBMIT BUTTON
             // SUBMIT BUTTON
+
 
             submitButtonEdit.addEventListener("click", function(event) {
                 event.preventDefault()
@@ -425,19 +430,34 @@ function editCard(value) {
                     input.reportValidity();
                 })
 
-                bookName.textContent = inputTitleEdit.value;
-                bookAuthor.textContent = inputAuthorEdit.value;
-                totalPages.textContent = inputTotalEdit.value;
-                completedPages.textContent = inputCompletedEdit.value;    
-                
-                myLibrary[cardNumber].title = inputTitleEdit.value;
-                myLibrary[cardNumber].author = inputAuthorEdit.value;
-                myLibrary[cardNumber].completedPages = inputCompletedEdit.value;
-                myLibrary[cardNumber].totalPages = inputTotalEdit.value;
+                if(Number(document.querySelector(".text-pole3-edit input").value < document.querySelector(".text-pole4-edit input").value)) {
+                     alert("You cannot read more pages than the book has");
+                } else {
+                    const totalStat = Number(document.querySelector(".stat-only-total-pages").textContent);
+                    const currentCardTotal = Number(totalPages.textContent);
+                    const totalResult = totalStat - currentCardTotal;
+                    document.querySelector(".stat-only-total-pages").textContent = totalResult.toString();
 
-                console.log("Problem");
+                    const completedStat = Number(document.querySelector(".stat-only-completed-pages").textContent);
+                    const currentCardCompleted = Number(completedPages.textContent);
+                    const completedResult = completedStat - currentCardCompleted;
+                    document.querySelector(".stat-only-completed-pages").textContent = completedResult.toString();
+
+                    bookName.textContent = inputTitleEdit.value;
+                    bookAuthor.textContent = inputAuthorEdit.value;
+                    totalPages.textContent = inputTotalEdit.value;
+                    completedPages.textContent = inputCompletedEdit.value;    
+                
+                    myLibrary[cardNumber].title = inputTitleEdit.value;
+                    myLibrary[cardNumber].author = inputAuthorEdit.value;
+                    myLibrary[cardNumber].completedPages = inputCompletedEdit.value;
+                    myLibrary[cardNumber].totalPages = inputTotalEdit.value;
+
+                    document.querySelector(".stat-only-total-pages").textContent = totalPages.textContent;
+                    document.querySelector(".stat-only-completed-pages").textContent = completedPages.textContent;
         
-                removeFormEdit();
+                    removeFormEdit();
+                }
             })
 
             function removeFormEdit() {
@@ -452,13 +472,6 @@ function editCard(value) {
    
 
 }
-
-
-// PROBLEM END
-// PROBLEM END
-// PROBLEM END
-// PROBLEM END
-// PROBLEM END
 
 
 
