@@ -236,8 +236,80 @@ const wholeDoc = document.addEventListener("click", function(e) {
     } else if(e.target.className === "edit" || e.target.className === "fa-solid fa-pen-to-square") {
         const targetedEdit = e.target;
         editCard(targetedEdit);
+    } else if(e.target.className === "plus" || e.target.className === "fa-solid fa-plus") {
+        const plusOne = e.target;
+        addOne(plusOne);
+    } else if(e.target.className === "minus" || e.target.className === "fa-solid fa-minus") {
+        const minusOne = e.target;
+        removeOne(minusOne);
     }
 })
+
+function removeOne(value) {
+    const cardNumber = value.getAttribute("data-card");  
+    const allBookCards = document.querySelectorAll(".book-card");
+
+    allBookCards.forEach(card => {
+        if(card.getAttribute("data-card") == cardNumber) {
+            let readStatCard = card.querySelector(".book-card-stat-read").textContent;
+            let readStatNormal = document.querySelector(".stat-only-completed-pages").textContent;  // COMPLETED PAGES STAT
+            let totalStatNormal = document.querySelector(".stat-only-total-pages").textContent;    // TOTAL PAGES STAT
+            let totalStatCard = card.querySelector(".book-card-stat-total").textContent;
+            let completedBooks = document.querySelector(".stat-only-completed-books").textContent;   // TOTAL BOOKS STAT
+
+            if(Number(readStatCard) === Number(totalStatCard)) {
+                card.querySelector(".tick").style.backgroundColor = "white";
+                const finalCardStat = Number(readStatCard) - 1;
+                const finalStatNormal = Number(readStatNormal) - 1;
+                const finalStatBooks = Number(completedBooks) - 1;
+                card.querySelector(".book-card-stat-read").textContent = finalCardStat;
+                document.querySelector(".stat-only-completed-pages").textContent = finalStatNormal;
+                document.querySelector(".stat-only-completed-books").textContent = finalStatBooks;
+
+            } else if(Number(readStatCard) === 0) {
+                false;
+            } else {
+                const finalCardStat = Number(readStatCard) - 1;
+                const finalStatNormal = Number(readStatNormal) - 1;
+                card.querySelector(".book-card-stat-read").textContent = finalCardStat;
+                document.querySelector(".stat-only-completed-pages").textContent = finalStatNormal;
+            }
+        }
+    })
+}
+
+function addOne(value) {
+    const cardNumber = value.getAttribute("data-card");  
+    const allBookCards = document.querySelectorAll(".book-card");
+
+    allBookCards.forEach(card => {
+        if(card.getAttribute("data-card") == cardNumber) {
+            let readStatCard = card.querySelector(".book-card-stat-read").textContent;
+            let readStatNormal = document.querySelector(".stat-only-completed-pages").textContent;  // COMPLETED PAGES STAT
+            let totalStatNormal = document.querySelector(".stat-only-total-pages").textContent;    // TOTAL PAGES STAT
+            let totalStatCard = card.querySelector(".book-card-stat-total").textContent;
+            let completedBooks = document.querySelector(".stat-only-completed-books").textContent;   // TOTAL BOOKS STAT
+
+            if(Number(readStatCard) === Number(totalStatCard)-1) {
+                card.querySelector(".tick").style.backgroundColor = "green";
+                const finalCardStat = Number(readStatCard) + 1;
+                const finalStatNormal = Number(readStatNormal) + 1;
+                const finalStatBooks = Number(completedBooks) + 1;
+                card.querySelector(".book-card-stat-read").textContent = finalCardStat;
+                document.querySelector(".stat-only-completed-pages").textContent = finalStatNormal;
+                document.querySelector(".stat-only-completed-books").textContent = finalStatBooks;
+
+            } else if(Number(readStatCard) === Number(totalStatCard)) {
+                false;
+            } else {
+                const finalCardStat = Number(readStatCard) + 1;
+                const finalStatNormal = Number(readStatNormal) + 1;
+                card.querySelector(".book-card-stat-read").textContent = finalCardStat;
+                document.querySelector(".stat-only-completed-pages").textContent = finalStatNormal;
+            }
+        }
+    })
+}
 
 function editCard(value) {
     const cardNumber = value.getAttribute("data-card");  
@@ -483,13 +555,17 @@ function removeCard(element) {
 
             let currentTotal = card.querySelector(".book-card-stats");
 
+
             // REMOVES BOOK TOTAL PAGES FROM STATS
+
 
             let currentTotalValue = Number(currentTotal.querySelector(".book-card-stat-total").textContent);  //current card total
             let totalForm = Number(document.querySelector(".stat-only-total-pages").textContent); //current total stats
             document.querySelector(".stat-only-total-pages").textContent = totalForm - currentTotalValue;
 
-            // REMOVES BOOK TOTAL PAGES FROM STATS
+
+            // REMOVES BOOK COMPLETED PAGES FROM STATS
+
 
             let currentCompletedValue = Number(currentTotal.querySelector(".book-card-stat-read").textContent);  //current card completed
             let completedForm = Number(document.querySelector(".stat-only-completed-pages").textContent); //current completed stats
@@ -502,6 +578,17 @@ function removeCard(element) {
             const totalBooksStat = Number(document.querySelector(".stat-only-total-books").textContent)
             const totalBooksStatPlus = totalBooksStat - 1;
             document.querySelector(".stat-only-total-books").textContent = totalBooksStatPlus;
+
+
+            // REMOVES ONE BOOK FROM COMPLETED BOOKS STATS
+
+
+            if(card.querySelector(".book-card-stat-read").textContent == card.querySelector(".book-card-stat-total").textContent) {
+                const completedBooksStat = document.querySelector(".stat-only-completed-books").textContent;
+                const result = completedBooksStat-1;
+                document.querySelector(".stat-only-completed-books").textContent = result;
+            }
+            
 
             card.remove();
         }
