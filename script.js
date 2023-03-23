@@ -152,12 +152,15 @@ document.addEventListener("mousemove", function() {
     }
 })
 
+
 submitButton.addEventListener("click", function(event) {
     event.preventDefault()
     allInputs.forEach((input) => {
         input.checkValidity();
         input.reportValidity();
     })
+
+    console.log(myLibrary);
 
     if(checkbox.checked) {
         bookCompleted = true;
@@ -167,6 +170,8 @@ submitButton.addEventListener("click", function(event) {
 
     if(Number(document.querySelector(".text-pole3 input").value) < Number(document.querySelector(".text-pole4 input").value)) {
         alert("You cannot read more pages than the book has");
+    } else if(Number(document.querySelector(".text-pole3 input").value) <= 0) {
+        alert("The book has to have more than 0 pages.");
     } else {
         if(inputTitle.value === "" || inputAuthor.value === "" || inputTotal.value === "" || inputCompleted.value === "") {
             false;
@@ -187,7 +192,18 @@ submitButton.addEventListener("click", function(event) {
             const totalBooksStatPlus = totalBooksStat + 1;
             document.querySelector(".stat-only-total-books").textContent = totalBooksStatPlus;
     
-    
+            if(document.querySelector(".text-pole3 input").value === document.querySelector(".text-pole4 input").value) {
+                const completedBooks = document.querySelector(".stat-only-completed-books").textContent;
+                const finalCompletedBooks = Number(completedBooks) + 1;
+                document.querySelector(".stat-only-completed-books").textContent = finalCompletedBooks;
+                const allBookCards = document.querySelectorAll(".book-card");
+
+                allBookCards.forEach(card => {
+                    if(Number(card.querySelector(".book-card-stat-read").textContent) === Number(card.querySelector(".book-card-stat-total").textContent)) {
+                        card.querySelector(".tick").style.backgroundColor = "green";
+                    }
+                })
+            }
     
             removeForm();
     }
@@ -242,8 +258,38 @@ const wholeDoc = document.addEventListener("click", function(e) {
     } else if(e.target.className === "minus" || e.target.className === "fa-solid fa-minus") {
         const minusOne = e.target;
         removeOne(minusOne);
+    } else if(e.target.className === "tick" || e.target.className === "fa-solid fa-check") {
+        const tick = e.target;
+        tickIt(tick);
     }
 })
+
+function tickIt(value) {
+    const cardNumber = value.getAttribute("data-card");  
+    const allBookCards = document.querySelectorAll(".book-card");
+
+    allBookCards.forEach(card => {
+        if(card.getAttribute("data-card") == cardNumber) {
+            let readStatCard = card.querySelector(".book-card-stat-read").textContent;
+            let readStatNormal = document.querySelector(".stat-only-completed-pages").textContent;  // COMPLETED PAGES STAT
+            let totalStatNormal = document.querySelector(".stat-only-total-pages").textContent;    // TOTAL PAGES STAT
+            let totalStatCard = card.querySelector(".book-card-stat-total").textContent;
+            let completedBooks = document.querySelector(".stat-only-completed-books").textContent;   // TOTAL BOOKS STAT
+
+            
+            if(Number(readStatCard) < Number(totalStatCard)) {
+                const final = Number(totalStatCard - readStatCard) + Number(readStatNormal);
+                document.querySelector(".stat-only-completed-pages").textContent = final;
+                card.querySelector(".tick").style.backgroundColor = "green";
+                card.querySelector(".book-card-stat-read").textContent = card.querySelector(".book-card-stat-total").textContent;
+                const finalCompletedBooks = Number(completedBooks) + 1;
+                document.querySelector(".stat-only-completed-books").textContent = finalCompletedBooks;
+            } else if(Number(readStatCard) === Number(totalStatCard)) {
+                false;
+            }
+        }
+    })
+}
 
 function removeOne(value) {
     const cardNumber = value.getAttribute("data-card");  
@@ -368,7 +414,7 @@ function editCard(value) {
             // CANCEL BUTTON
 
 
-            cancelButtonEdit.addEventListener("click", function() {
+            cancelButtonEdit.addEventListener("click", function(event) {
                 bookFormEdit.style.top = "-200%"; 
                 allInputs.forEach((input) => {
                     input.value = "";
@@ -380,6 +426,7 @@ function editCard(value) {
                 })
             
                 checkbox.checked = false;
+                event.stopImmediatePropagation()
             })
 
             if(inputTitleEdit.value !== "") {
@@ -408,7 +455,7 @@ function editCard(value) {
                 colorChange(labelTitleEdit); 
             })
             
-            inputTitleEdit.addEventListener("blur", function() {
+            inputTitleEdit.addEventListener("blur", function(event) {
                 if(inputTitleEdit.value !== "") {
                     labelTitleEdit.style.top = labelPercentageFocusEdit;
                     colorChange(labelTitleEdit);
@@ -416,14 +463,17 @@ function editCard(value) {
                     labelTitleEdit.style.top = labelPercentageNormalEdit;
                     returnColor(labelTitleEdit);
                 }
+
+                event.stopImmediatePropagation()
             })
 
-            inputAuthorEdit.addEventListener("focus", function() {
+            inputAuthorEdit.addEventListener("focus", function(event) {
                 labelAuthorEdit.style.top = labelPercentageFocusEdit;
                 colorChange(labelAuthorEdit);
+                event.stopImmediatePropagation()
             })
             
-            inputAuthorEdit.addEventListener("blur", function() {
+            inputAuthorEdit.addEventListener("blur", function(event) {
                 if(inputAuthorEdit.value !== "") {
                     labelAuthorEdit.style.top = labelPercentageFocusEdit;
                     colorChange(labelAuthorEdit);
@@ -431,15 +481,17 @@ function editCard(value) {
                     labelAuthorEdit.style.top = labelPercentageNormalEdit;
                     returnColor(labelAuthorEdit);
                 }
+                event.stopImmediatePropagation()
             })
 
 
-            inputTotalEdit.addEventListener("focus", function() {
+            inputTotalEdit.addEventListener("focus", function(event) {
                 labelTotalEdit.style.top = labelPercentageFocusEdit;
                 colorChange(labelTotalEdit);
+                event.stopImmediatePropagation()
             })
             
-            inputTotalEdit.addEventListener("blur", function() {
+            inputTotalEdit.addEventListener("blur", function(event) {
                 if(inputTotalEdit.value !== "") {
                     labelTotalEdit.style.top = labelPercentageFocusEdit;
                     colorChange(labelTotalEdit);
@@ -447,14 +499,16 @@ function editCard(value) {
                     labelTotalEdit.style.top = labelPercentageNormalEdit;
                     returnColor(labelTotalEdit);
                 }
+                event.stopImmediatePropagation()
             })
 
-            inputCompletedEdit.addEventListener("focus", function() {
+            inputCompletedEdit.addEventListener("focus", function(event) {
                 labelCompletedEdit.style.top = labelPercentageFocusEdit;
                 colorChange(labelCompletedEdit);
+                event.stopImmediatePropagation()
             })
             
-            inputCompletedEdit.addEventListener("blur", function() {
+            inputCompletedEdit.addEventListener("blur", function(event) {
                 if(inputCompletedEdit.value !== "") {
                     labelCompletedEdit.style.top = labelPercentageFocusEdit;
                     colorChange(labelCompletedEdit);
@@ -462,13 +516,17 @@ function editCard(value) {
                     labelCompletedEdit.style.top = labelPercentageNormalEdit;
                     returnColor(labelCompletedEdit);
                 }
+
+                event.stopImmediatePropagation()
             })
 
 
             // CHECKBOX
+            // CHECKBOX
+            // CHECKBOX
 
 
-            checkboxEdit.addEventListener("click", function() {
+            checkboxEdit.addEventListener("click", function(event) {
                 if(checkboxEdit.checked) {
                     document.querySelector(".text-pole4-edit input").value = document.querySelector(".text-pole3-edit input").value
                 } 
@@ -477,16 +535,20 @@ function editCard(value) {
                     labelCompletedEdit.style.top = labelPercentageNormalEdit;
                     returnColor(labelCompletedEdit);
                 }
+
+                event.stopImmediatePropagation()
             })
             
-            document.addEventListener("mousemove", function() {
+            document.addEventListener("mousemove", function(event) {
                 if(document.querySelector(".text-pole4-edit input").value != document.querySelector(".text-pole3-edit input").value) {
                     checkboxEdit.checked = false;
                 }
             
                 if(document.querySelector(".text-pole4-edit input").value === document.querySelector(".text-pole3-edit input").value && (document.querySelector(".text-pole4-edit input").value != "" || document.querySelector(".text-pole3-edit input").value) != "") {
-                    checkbox.checked = true;
+                    checkboxEdit.checked = true;
                 }
+
+                event.stopImmediatePropagation()
             })
 
 
@@ -494,26 +556,50 @@ function editCard(value) {
             // SUBMIT BUTTON
             // SUBMIT BUTTON
 
+            const completedOld = book.querySelector(".book-card-stat-read").textContent;
+            const totalOld = book.querySelector(".book-card-stat-total").textContent;
+
 
             submitButtonEdit.addEventListener("click", function(event) {
+                event.stopPropagation();
                 event.preventDefault()
                 allInputsEdit.forEach((input) => {
                     input.checkValidity();
                     input.reportValidity();
                 })
 
-                if(Number(document.querySelector(".text-pole3-edit input").value < document.querySelector(".text-pole4-edit input").value)) {
-                     alert("You cannot read more pages than the book has");
+
+                if(Number(document.querySelector(".text-pole3-edit input").value) < Number(document.querySelector(".text-pole4-edit input").value)) {
+                    alert("You cannot read more pages than the book has");
+                    event.stopImmediatePropagation()
+                } else if(Number(document.querySelector(".text-pole3-edit input").value) <= 0) {
+                    alert("The has to have more than 0 pages");
                 } else {
+                    const currentInputTotal = Number(document.querySelector(".text-pole3-edit input").value)
+                    const currentInputCompleted = Number(document.querySelector(".text-pole4-edit input").value)
+
                     const totalStat = Number(document.querySelector(".stat-only-total-pages").textContent);
                     const currentCardTotal = Number(totalPages.textContent);
-                    const totalResult = totalStat - currentCardTotal;
-                    document.querySelector(".stat-only-total-pages").textContent = totalResult.toString();
 
-                    const completedStat = Number(document.querySelector(".stat-only-completed-pages").textContent);
+                    const currentCardTotalOld = Number(totalOld);
+                    const currentCardCompletedOld = Number(completedOld);
+
+                    const totalResult = totalStat + currentInputTotal - currentCardTotalOld;
+
+                    // console.log(totalResult);
+
+                    document.querySelector(".stat-only-total-pages").textContent = totalResult;
+
+                    const completedStat = Number(document.querySelector(".stat-only-completed-pages").textContent); 
                     const currentCardCompleted = Number(completedPages.textContent);
-                    const completedResult = completedStat - currentCardCompleted;
-                    document.querySelector(".stat-only-completed-pages").textContent = completedResult.toString();
+
+                    console.log(completedStat); // 50 should be - WHOLE COMPLETED STAT
+                    console.log(currentInputCompleted); // 20 should be 
+                    console.log(currentCardCompletedOld);  // 50 should be 
+
+                    const completedResult = completedStat + currentInputCompleted - currentCardCompletedOld;
+
+                    document.querySelector(".stat-only-completed-pages").textContent = completedResult;
 
                     bookName.textContent = inputTitleEdit.value;
                     bookAuthor.textContent = inputAuthorEdit.value;
@@ -525,9 +611,36 @@ function editCard(value) {
                     myLibrary[cardNumber].completedPages = inputCompletedEdit.value;
                     myLibrary[cardNumber].totalPages = inputTotalEdit.value;
 
-                    document.querySelector(".stat-only-total-pages").textContent = totalPages.textContent;
-                    document.querySelector(".stat-only-completed-pages").textContent = completedPages.textContent;
+                    if(document.querySelector(".text-pole3-edit input").value === document.querySelector(".text-pole4-edit input").value) {
+                        const completedBooks = document.querySelector(".stat-only-completed-books").textContent;
+                        const allBookCards = document.querySelectorAll(".book-card");
+                        const numberValue = value.getAttribute("data-card");
+                        console.log(numberValue);
+                    }
+
+                    if(document.querySelector(".text-pole3-edit input").value === document.querySelector(".text-pole4-edit input").value) {
+                        if(book.querySelector(".tick").style.backgroundColor !== "green") {
+                            const completedBooks = document.querySelector(".stat-only-completed-books").textContent;
+                            const finalCompletedBooks = Number(completedBooks) + 1;
+                            document.querySelector(".stat-only-completed-books").textContent = finalCompletedBooks;
+                            const allBookCards = document.querySelectorAll(".book-card");
+                        }
         
+                        
+                        if(Number(document.querySelector(".text-pole3-edit input").value) === Number(document.querySelector(".text-pole4-edit input").value)) {
+                            book.querySelector(".tick").style.backgroundColor = "green";
+                        }
+                        
+                    }
+
+                    if(Number(document.querySelector(".text-pole3-edit input").value) !== Number(document.querySelector(".text-pole4-edit input").value) && book.querySelector(".tick").style.backgroundColor == "green") {
+                        book.querySelector(".tick").style.backgroundColor = "white";
+                        const completedBooks = document.querySelector(".stat-only-completed-books").textContent;
+                        const finalCompletedBooks = Number(completedBooks) - 1;
+                        document.querySelector(".stat-only-completed-books").textContent = finalCompletedBooks;
+                    }
+
+                    event.stopImmediatePropagation()
                     removeFormEdit();
                 }
             })
@@ -714,6 +827,31 @@ leftIcon.addEventListener("click", function() {
     rightIcon.style.display = "unset";
     leftIcon.style.display = "none";
 })
+
+
+
+// DELETE ALL BUTTON
+
+
+const deleteButton = document.querySelector(".delete");
+
+deleteButton.addEventListener("click", function() {
+    const allBookCards = document.querySelectorAll(".book-card");
+    allBookCards.forEach(card => {
+        card.remove();
+    })
+    
+    myLibrary = [];
+
+    document.querySelector(".stat-only-total-pages").textContent = 0;
+    document.querySelector(".stat-only-completed-books").textContent = 0;
+    document.querySelector(".stat-only-total-books").textContent = 0;
+    document.querySelector(".stat-only-completed-pages").textContent = 0;
+
+})
+
+
+
 
 
 
