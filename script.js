@@ -172,6 +172,8 @@ submitButton.addEventListener("click", function(event) {
         alert("You cannot read more pages than the book has");
     } else if(Number(document.querySelector(".text-pole3 input").value) <= 0) {
         alert("The book has to have more than 0 pages.");
+    } else if(Number(document.querySelector(".text-pole3 input").value > 1000)) {
+        false;
     } else {
         if(inputTitle.value === "" || inputAuthor.value === "" || inputTotal.value === "" || inputCompleted.value === "") {
             false;
@@ -574,6 +576,8 @@ function editCard(value) {
                     event.stopImmediatePropagation()
                 } else if(Number(document.querySelector(".text-pole3-edit input").value) <= 0) {
                     alert("The has to have more than 0 pages");
+                } else if(Number(document.querySelector(".text-pole3-edit input").value > 1000)) {
+                    false;   
                 } else {
                     const currentInputTotal = Number(document.querySelector(".text-pole3-edit input").value)
                     const currentInputCompleted = Number(document.querySelector(".text-pole4-edit input").value)

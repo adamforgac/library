@@ -73,7 +73,6 @@
     .book-image img {
         width: 250px;
     }
-    
 }
 
 @media only screen and (max-width: 550px) {
@@ -241,10 +240,6 @@
         margin-top: 80px;
         row-gap: 10px;
     }
-
-    .books-text-info {
-        
-    }
 }
 
 @media only screen and (max-height: 520px) {
@@ -295,50 +290,43 @@
 
 
 @media only screen and (max-width: 720px) {
-    .book-form-only form {
+    .book-form-only form, .book-form-only-edit form {
         display: grid;
-        grid-template-rows: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
         padding: 40px 20px;
         row-gap: 35px;
     }
 
-    .switch {
+    .switch, .switch-edit {
         display: none;
     }
 
-    .text-pole5 {
+    .text-pole5, .text-pole5-edit {
         display: none;
-    }
-
-    .book-form-only form {
-        grid-template-rows: repeat(4, 1fr);
     }
 }
 
 @media only screen and (max-width: 420px) {
-    .book-form-layout {
-        width: 100%;
-    }
-
-    .book-form {
+    .book-form, .book-form-edit {
         padding: 10px;
     }
 
-    .book-form-layout {
+    .book-form-layout, .book-form-layout-edit {
+        width: 100%;
         grid-template-rows: 1fr 4fr 0.8fr;
     }
-
 }
 
 @media only screen and (max-width: 320px) {
-    .book-form {
+    .book-form, .book-form-edit {
         height: 100%;
     }
 
-    .book-form-heading h2 {
+    .book-form-heading h2, .book-form-heading-edit h2 {
         font-size: 1.7rem;
     }
-    .book-form-buttons button i {
+
+    .book-form-buttons button i, .book-form-buttons-edit button i {
         font-size: 1.5rem;
     }
 }

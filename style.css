@@ -593,6 +593,7 @@ input[type=number] {
 
 .book-form-buttons-edit button i {
     transition: 0.5s;
+    font-size: 2rem;
 }
 
 .book-form-buttons-edit button {
@@ -601,10 +602,6 @@ input[type=number] {
     border: 2px solid white;
     background-color: black;
     color: white;
-}
-
-.book-form-buttons-edit button i {
-    font-size: 2rem;
 }
 
 .book-form-cancel-edit button {
@@ -630,14 +627,14 @@ input[type=number] {
     height: 34px;
 }
 
-  .switch-edit input {
+.switch-edit input {
     opacity: 0;
     width: 0;
     height: 0;
   }
   
   /* The slider */
-  .slider-edit {
+.slider-edit {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -649,7 +646,7 @@ input[type=number] {
     transition: .4s;
   }
   
-  .slider-edit:before {
+.slider-edit:before {
     position: absolute;
     content: "";
     height: 26px;
@@ -661,26 +658,26 @@ input[type=number] {
     transition: .4s;
   }
   
-  input:checked + .slider-edit {
+input:checked + .slider-edit {
     background-color: #2196F3;
   }
   
-  input:focus + .slider-edit {
+input:focus + .slider-edit {
     box-shadow: 0 0 1px #2196F3;
   }
   
-  input:checked + .slider-edit:before {
+input:checked + .slider-edit:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
   }
   
   /* Rounded sliders */
-  .slider-edit.round-edit {
+.slider-edit.round-edit {
     border-radius: 34px;
   }
   
-  .slider-edit.round-edit:before {
+.slider-edit.round-edit:before {
     border-radius: 50%;
   }
 
