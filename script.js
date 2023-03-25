@@ -6,6 +6,8 @@ const labelPercentageFocus = "-20%"
 const labelPercentageNormal = "32%"
 
 
+
+
 inputTitle.addEventListener("focus", function() {
     labelTitle.style.top = labelPercentageFocus;
     colorChange(labelTitle); 
@@ -49,6 +51,13 @@ const labelTotal = document.querySelector(".text-pole3 label");
 inputTotal.addEventListener("focus", function() {
     labelTotal.style.top = labelPercentageFocus;
     colorChange(labelTotal);
+
+    inputTotal.addEventListener("keypress", function(evt) {
+        if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+        {
+            evt.preventDefault();
+        }
+    })
 })
 
 inputTotal.addEventListener("blur", function() {
@@ -69,6 +78,13 @@ const labelCompleted = document.querySelector(".text-pole4 label");
 inputCompleted.addEventListener("focus", function() {
     labelCompleted.style.top = labelPercentageFocus;
     colorChange(labelCompleted);
+
+    inputCompleted.addEventListener("keypress", function(evt) {
+        if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57)
+        {
+            evt.preventDefault();
+        }
+    })
 })
 
 inputCompleted.addEventListener("blur", function() {
@@ -136,6 +152,11 @@ checkbox.addEventListener("click", function() {
         document.querySelector(".text-pole4 input").value = document.querySelector(".text-pole3 input").value
     } 
 
+    if(document.querySelector(".text-pole3 input").value !== "") {
+        labelCompleted.style.top = labelPercentageFocus;
+        colorChange(labelCompleted);
+    }
+
     if(document.querySelector(".text-pole4 input").value === "") {
         labelCompleted.style.top = labelPercentageNormal;
         returnColor(labelCompleted);
@@ -159,8 +180,6 @@ submitButton.addEventListener("click", function(event) {
         input.checkValidity();
         input.reportValidity();
     })
-
-    console.log(myLibrary);
 
     if(checkbox.checked) {
         bookCompleted = true;
@@ -286,6 +305,9 @@ function tickIt(value) {
                 card.querySelector(".book-card-stat-read").textContent = card.querySelector(".book-card-stat-total").textContent;
                 const finalCompletedBooks = Number(completedBooks) + 1;
                 document.querySelector(".stat-only-completed-books").textContent = finalCompletedBooks;
+
+                myLibrary[cardNumber].completedPages = myLibrary[cardNumber].totalPages;
+
             } else if(Number(readStatCard) === Number(totalStatCard)) {
                 false;
             }
@@ -314,6 +336,9 @@ function removeOne(value) {
                 document.querySelector(".stat-only-completed-pages").textContent = finalStatNormal;
                 document.querySelector(".stat-only-completed-books").textContent = finalStatBooks;
 
+                const data = Number(myLibrary[cardNumber].completedPages) - 1;
+                myLibrary[cardNumber].completedPages = data.toString();
+
             } else if(Number(readStatCard) === 0) {
                 false;
             } else {
@@ -321,6 +346,9 @@ function removeOne(value) {
                 const finalStatNormal = Number(readStatNormal) - 1;
                 card.querySelector(".book-card-stat-read").textContent = finalCardStat;
                 document.querySelector(".stat-only-completed-pages").textContent = finalStatNormal;
+
+                const data = Number(myLibrary[cardNumber].completedPages) - 1;
+                myLibrary[cardNumber].completedPages = data.toString();
             }
         }
     })
@@ -347,6 +375,8 @@ function addOne(value) {
                 document.querySelector(".stat-only-completed-pages").textContent = finalStatNormal;
                 document.querySelector(".stat-only-completed-books").textContent = finalStatBooks;
 
+                myLibrary[cardNumber].completedPages = myLibrary[cardNumber].totalPages;
+
             } else if(Number(readStatCard) === Number(totalStatCard)) {
                 false;
             } else {
@@ -354,6 +384,9 @@ function addOne(value) {
                 const finalStatNormal = Number(readStatNormal) + 1;
                 card.querySelector(".book-card-stat-read").textContent = finalCardStat;
                 document.querySelector(".stat-only-completed-pages").textContent = finalStatNormal;
+
+                const data = Number(myLibrary[cardNumber].completedPages) + 1;
+                myLibrary[cardNumber].completedPages = data.toString();
             }
         }
     })
@@ -532,6 +565,11 @@ function editCard(value) {
                 if(checkboxEdit.checked) {
                     document.querySelector(".text-pole4-edit input").value = document.querySelector(".text-pole3-edit input").value
                 } 
+
+                if(document.querySelector(".text-pole3-edit input").value !== "") {
+                    labelCompletedEdit.style.top = labelPercentageFocus;
+                    colorChange(labelCompletedEdit);
+                }
             
                 if(document.querySelector(".text-pole4-edit input").value === "") {
                     labelCompletedEdit.style.top = labelPercentageNormalEdit;
@@ -590,16 +628,10 @@ function editCard(value) {
 
                     const totalResult = totalStat + currentInputTotal - currentCardTotalOld;
 
-                    // console.log(totalResult);
-
                     document.querySelector(".stat-only-total-pages").textContent = totalResult;
 
                     const completedStat = Number(document.querySelector(".stat-only-completed-pages").textContent); 
                     const currentCardCompleted = Number(completedPages.textContent);
-
-                    console.log(completedStat); // 50 should be - WHOLE COMPLETED STAT
-                    console.log(currentInputCompleted); // 20 should be 
-                    console.log(currentCardCompletedOld);  // 50 should be 
 
                     const completedResult = completedStat + currentInputCompleted - currentCardCompletedOld;
 
@@ -619,7 +651,6 @@ function editCard(value) {
                         const completedBooks = document.querySelector(".stat-only-completed-books").textContent;
                         const allBookCards = document.querySelectorAll(".book-card");
                         const numberValue = value.getAttribute("data-card");
-                        console.log(numberValue);
                     }
 
                     if(document.querySelector(".text-pole3-edit input").value === document.querySelector(".text-pole4-edit input").value) {

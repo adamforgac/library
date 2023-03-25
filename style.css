@@ -51,6 +51,7 @@ table {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    touch-action: manipulation;
 }
 
 :root {
@@ -114,7 +115,6 @@ table {
     grid-row: 1 / -1;
     grid-column: 2 / -1;
     z-index: 100;
-    /* height: clamp(739px, 100vh, 5000px); */
     background-color: #EAE7DE;
     position: relative;
     height: 100vh;
@@ -129,6 +129,11 @@ table {
     align-items: center;
 }
 
+.delete-button button:hover {
+    border: 1px solid white;
+    cursor: pointer;
+}
+
 .books-information {
     display: grid;
     grid-auto-rows: 4fr 2fr 1fr;
@@ -138,10 +143,6 @@ table {
     position: fixed;
     margin-top: 100px;
     background-color: #EAE7DE;
-}
-
-.books-information > div {
-
 }
 
 .delete-button button {
@@ -233,12 +234,16 @@ table {
     width: 150px;
 }
 
+.edit i, .remove i, .minus i, .plus i, .tick i {
+    color: black;
+}
+
 
 /* BOOK FORM */
 
 
 .book-form {
-    position: absolute;
+    position: fixed;
     top: -150%;
     left: 0%;
     z-index: 500;
@@ -467,7 +472,7 @@ input[type=number] {
 
 
 .book-form-edit {
-    position: absolute;
+    position: fixed;
     top: -150%;
     left: 0%;
     z-index: 500;

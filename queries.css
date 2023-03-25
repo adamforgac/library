@@ -36,12 +36,16 @@
         top: 50%;
         left: 20%;
         display: none;
+        width: 40px;
+        height: 40px;
     }
     
     .right {
         top: 50%;
         left: 20%;
         position: absolute;
+        width: 40px;
+        height: 40px;
     }
 
     .wrapper {
