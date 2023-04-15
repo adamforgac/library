@@ -202,7 +202,7 @@ submitButton.addEventListener('click', (event) => {
   ) {
     false;
   } else {
-    addToLibrary(
+    Book.addToLibrary(
       inputTitle.value,
       inputAuthor.value,
       inputTotal.value,
@@ -275,18 +275,27 @@ function removeForm() {
   checkbox.checked = false;
 }
 
-function Book(title, author, totalPages, completedPages, bookDone) {
-  this.title = title;
-  this.author = author;
-  this.totalPages = totalPages;
-  this.completedPages = completedPages;
-  this.bookDone = bookDone;
-}
+// function Book(title, author, totalPages, completedPages, bookDone) {
+//   this.title = title;
+//   this.author = author;
+//   this.totalPages = totalPages;
+//   this.completedPages = completedPages;
+//   this.bookDone = bookDone;
+// }
 
-function addToLibrary(title, author, totalPages, completedPages, bookDone) {
-  myLibrary.push(new Book(title, author, totalPages, completedPages, bookDone));
+class Book {
+  constructor(title, author, totalPages, completedPages, bookDone) {
+    this.title = title;
+    this.author = author;
+    this.totalPages = totalPages;
+    this.completedPages = completedPages;
+    this.bookDone = bookDone;
+  }
 
-  loopThroughtArray(myLibrary.length);
+  static addToLibrary(title, author, totalPages, completedPages, bookDone) {
+    myLibrary.push(new Book(title, author, totalPages, completedPages, bookDone));
+    loopThroughtArray(myLibrary.length);
+  }
 }
 
 // REMOVE BUTTON
