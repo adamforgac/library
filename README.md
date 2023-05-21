@@ -1,3 +1,3 @@
 # Library
-Creating book library using object constructor
-this project focuses more on functionality than design.
+Creating book library using object constructor.
+This project focuses more on functionality than design.
