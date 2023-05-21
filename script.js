@@ -47,8 +47,8 @@ inputTotal.addEventListener('focus', () => {
 
   inputTotal.addEventListener('keypress', (evt) => {
     if (
-      (evt.which != 8 && evt.which != 0 && evt.which < 48) ||
-      evt.which > 57
+      (evt.which != 8 && evt.which != 0 && evt.which < 48)
+      || evt.which > 57
     ) {
       evt.preventDefault();
     }
@@ -74,8 +74,8 @@ inputCompleted.addEventListener('focus', () => {
 
   inputCompleted.addEventListener('keypress', (evt) => {
     if (
-      (evt.which != 8 && evt.which != 0 && evt.which < 48) ||
-      evt.which > 57
+      (evt.which != 8 && evt.which != 0 && evt.which < 48)
+      || evt.which > 57
     ) {
       evt.preventDefault();
     }
@@ -139,8 +139,7 @@ let bookCompleted;
 
 checkbox.addEventListener('click', () => {
   if (checkbox.checked) {
-    document.querySelector('.text-pole4 input').value =
-      document.querySelector('.text-pole3 input').value;
+    document.querySelector('.text-pole4 input').value = document.querySelector('.text-pole3 input').value;
   }
 
   if (document.querySelector('.text-pole3 input').value !== '') {
@@ -156,17 +155,17 @@ checkbox.addEventListener('click', () => {
 
 document.addEventListener('mousemove', () => {
   if (
-    document.querySelector('.text-pole4 input').value !=
-    document.querySelector('.text-pole3 input').value
+    document.querySelector('.text-pole4 input').value
+    != document.querySelector('.text-pole3 input').value
   ) {
     checkbox.checked = false;
   }
 
   if (
-    document.querySelector('.text-pole4 input').value ===
-      document.querySelector('.text-pole3 input').value &&
-    (document.querySelector('.text-pole4 input').value != '' ||
-      document.querySelector('.text-pole3 input').value) != ''
+    document.querySelector('.text-pole4 input').value
+      === document.querySelector('.text-pole3 input').value
+    && (document.querySelector('.text-pole4 input').value != ''
+      || document.querySelector('.text-pole3 input').value) != ''
   ) {
     checkbox.checked = true;
   }
@@ -186,8 +185,8 @@ submitButton.addEventListener('click', (event) => {
   }
 
   if (
-    Number(document.querySelector('.text-pole3 input').value) <
-    Number(document.querySelector('.text-pole4 input').value)
+    Number(document.querySelector('.text-pole3 input').value)
+    < Number(document.querySelector('.text-pole4 input').value)
   ) {
     alert('You cannot read more pages than the book has');
   } else if (Number(document.querySelector('.text-pole3 input').value) <= 0) {
@@ -195,10 +194,10 @@ submitButton.addEventListener('click', (event) => {
   } else if (Number(document.querySelector('.text-pole3 input').value > 1000)) {
     false;
   } else if (
-    inputTitle.value === '' ||
-    inputAuthor.value === '' ||
-    inputTotal.value === '' ||
-    inputCompleted.value === ''
+    inputTitle.value === ''
+    || inputAuthor.value === ''
+    || inputTotal.value === ''
+    || inputCompleted.value === ''
   ) {
     false;
   } else {
@@ -207,49 +206,46 @@ submitButton.addEventListener('click', (event) => {
       inputAuthor.value,
       inputTotal.value,
       inputCompleted.value,
-      bookCompleted
+      bookCompleted,
     );
 
     const totalDisplay = Number(
-      document.querySelector('.stat-only-total-pages').textContent
+      document.querySelector('.stat-only-total-pages').textContent,
     );
     const totalForm = Number(document.querySelector('.text-pole3 input').value);
     const totalValue = totalDisplay + totalForm;
     document.querySelector('.stat-only-total-pages').textContent = totalValue;
 
     const completedDisplay = Number(
-      document.querySelector('.stat-only-completed-pages').textContent
+      document.querySelector('.stat-only-completed-pages').textContent,
     );
     const completedForm = Number(
-      document.querySelector('.text-pole4 input').value
+      document.querySelector('.text-pole4 input').value,
     );
     const completedValue = completedDisplay + completedForm;
-    document.querySelector('.stat-only-completed-pages').textContent =
-      completedValue;
+    document.querySelector('.stat-only-completed-pages').textContent = completedValue;
 
     const totalBooksStat = Number(
-      document.querySelector('.stat-only-total-books').textContent
+      document.querySelector('.stat-only-total-books').textContent,
     );
     const totalBooksStatPlus = totalBooksStat + 1;
-    document.querySelector('.stat-only-total-books').textContent =
-      totalBooksStatPlus;
+    document.querySelector('.stat-only-total-books').textContent = totalBooksStatPlus;
 
     if (
-      document.querySelector('.text-pole3 input').value ===
-      document.querySelector('.text-pole4 input').value
+      document.querySelector('.text-pole3 input').value
+      === document.querySelector('.text-pole4 input').value
     ) {
       const completedBooks = document.querySelector(
-        '.stat-only-completed-books'
+        '.stat-only-completed-books',
       ).textContent;
       const finalCompletedBooks = Number(completedBooks) + 1;
-      document.querySelector('.stat-only-completed-books').textContent =
-        finalCompletedBooks;
+      document.querySelector('.stat-only-completed-books').textContent = finalCompletedBooks;
       const allBookCards = document.querySelectorAll('.book-card');
 
       allBookCards.forEach((card) => {
         if (
-          Number(card.querySelector('.book-card-stat-read').textContent) ===
-          Number(card.querySelector('.book-card-stat-total').textContent)
+          Number(card.querySelector('.book-card-stat-read').textContent)
+          === Number(card.querySelector('.book-card-stat-total').textContent)
         ) {
           card.querySelector('.tick').style.backgroundColor = 'green';
         }
@@ -293,32 +289,32 @@ function addToLibrary(title, author, totalPages, completedPages, bookDone) {
 
 const wholeDoc = document.addEventListener('click', (e) => {
   if (
-    e.target.className === 'remove' ||
-    e.target.className === 'fa-solid fa-trash'
+    e.target.className === 'remove'
+    || e.target.className === 'fa-solid fa-trash'
   ) {
     const targeted = e.target;
     removeCard(targeted);
   } else if (
-    e.target.className === 'edit' ||
-    e.target.className === 'fa-solid fa-pen-to-square'
+    e.target.className === 'edit'
+    || e.target.className === 'fa-solid fa-pen-to-square'
   ) {
     const targetedEdit = e.target;
     editCard(targetedEdit);
   } else if (
-    e.target.className === 'plus' ||
-    e.target.className === 'fa-solid fa-plus'
+    e.target.className === 'plus'
+    || e.target.className === 'fa-solid fa-plus'
   ) {
     const plusOne = e.target;
     addOne(plusOne);
   } else if (
-    e.target.className === 'minus' ||
-    e.target.className === 'fa-solid fa-minus'
+    e.target.className === 'minus'
+    || e.target.className === 'fa-solid fa-minus'
   ) {
     const minusOne = e.target;
     removeOne(minusOne);
   } else if (
-    e.target.className === 'tick' ||
-    e.target.className === 'fa-solid fa-check'
+    e.target.className === 'tick'
+    || e.target.className === 'fa-solid fa-check'
   ) {
     const tick = e.target;
     tickIt(tick);
@@ -332,32 +328,28 @@ function tickIt(value) {
   allBookCards.forEach((card) => {
     if (card.getAttribute('data-card') == cardNumber) {
       const readStatCard = card.querySelector(
-        '.book-card-stat-read'
+        '.book-card-stat-read',
       ).textContent;
       const readStatNormal = document.querySelector(
-        '.stat-only-completed-pages'
+        '.stat-only-completed-pages',
       ).textContent; // COMPLETED PAGES STAT
       const totalStatNormal = document.querySelector(
-        '.stat-only-total-pages'
+        '.stat-only-total-pages',
       ).textContent; // TOTAL PAGES STAT
       const totalStatCard = card.querySelector(
-        '.book-card-stat-total'
+        '.book-card-stat-total',
       ).textContent;
       const completedBooks = document.querySelector(
-        '.stat-only-completed-books'
+        '.stat-only-completed-books',
       ).textContent; // TOTAL BOOKS STAT
 
       if (Number(readStatCard) < Number(totalStatCard)) {
-        const final =
-          Number(totalStatCard - readStatCard) + Number(readStatNormal);
-        document.querySelector('.stat-only-completed-pages').textContent =
-          final;
+        const final = Number(totalStatCard - readStatCard) + Number(readStatNormal);
+        document.querySelector('.stat-only-completed-pages').textContent = final;
         card.querySelector('.tick').style.backgroundColor = 'green';
-        card.querySelector('.book-card-stat-read').textContent =
-          card.querySelector('.book-card-stat-total').textContent;
+        card.querySelector('.book-card-stat-read').textContent = card.querySelector('.book-card-stat-total').textContent;
         const finalCompletedBooks = Number(completedBooks) + 1;
-        document.querySelector('.stat-only-completed-books').textContent =
-          finalCompletedBooks;
+        document.querySelector('.stat-only-completed-books').textContent = finalCompletedBooks;
 
         myLibrary[cardNumber].completedPages = myLibrary[cardNumber].totalPages;
       } else if (Number(readStatCard) === Number(totalStatCard)) {
@@ -374,19 +366,19 @@ function removeOne(value) {
   allBookCards.forEach((card) => {
     if (card.getAttribute('data-card') == cardNumber) {
       const readStatCard = card.querySelector(
-        '.book-card-stat-read'
+        '.book-card-stat-read',
       ).textContent;
       const readStatNormal = document.querySelector(
-        '.stat-only-completed-pages'
+        '.stat-only-completed-pages',
       ).textContent; // COMPLETED PAGES STAT
       const totalStatNormal = document.querySelector(
-        '.stat-only-total-pages'
+        '.stat-only-total-pages',
       ).textContent; // TOTAL PAGES STAT
       const totalStatCard = card.querySelector(
-        '.book-card-stat-total'
+        '.book-card-stat-total',
       ).textContent;
       const completedBooks = document.querySelector(
-        '.stat-only-completed-books'
+        '.stat-only-completed-books',
       ).textContent; // TOTAL BOOKS STAT
 
       if (Number(readStatCard) === Number(totalStatCard)) {
@@ -395,10 +387,8 @@ function removeOne(value) {
         const finalStatNormal = Number(readStatNormal) - 1;
         const finalStatBooks = Number(completedBooks) - 1;
         card.querySelector('.book-card-stat-read').textContent = finalCardStat;
-        document.querySelector('.stat-only-completed-pages').textContent =
-          finalStatNormal;
-        document.querySelector('.stat-only-completed-books').textContent =
-          finalStatBooks;
+        document.querySelector('.stat-only-completed-pages').textContent = finalStatNormal;
+        document.querySelector('.stat-only-completed-books').textContent = finalStatBooks;
 
         const data = Number(myLibrary[cardNumber].completedPages) - 1;
         myLibrary[cardNumber].completedPages = data.toString();
@@ -408,8 +398,7 @@ function removeOne(value) {
         const finalCardStat = Number(readStatCard) - 1;
         const finalStatNormal = Number(readStatNormal) - 1;
         card.querySelector('.book-card-stat-read').textContent = finalCardStat;
-        document.querySelector('.stat-only-completed-pages').textContent =
-          finalStatNormal;
+        document.querySelector('.stat-only-completed-pages').textContent = finalStatNormal;
 
         const data = Number(myLibrary[cardNumber].completedPages) - 1;
         myLibrary[cardNumber].completedPages = data.toString();
@@ -425,19 +414,19 @@ function addOne(value) {
   allBookCards.forEach((card) => {
     if (card.getAttribute('data-card') == cardNumber) {
       const readStatCard = card.querySelector(
-        '.book-card-stat-read'
+        '.book-card-stat-read',
       ).textContent;
       const readStatNormal = document.querySelector(
-        '.stat-only-completed-pages'
+        '.stat-only-completed-pages',
       ).textContent; // COMPLETED PAGES STAT
       const totalStatNormal = document.querySelector(
-        '.stat-only-total-pages'
+        '.stat-only-total-pages',
       ).textContent; // TOTAL PAGES STAT
       const totalStatCard = card.querySelector(
-        '.book-card-stat-total'
+        '.book-card-stat-total',
       ).textContent;
       const completedBooks = document.querySelector(
-        '.stat-only-completed-books'
+        '.stat-only-completed-books',
       ).textContent; // TOTAL BOOKS STAT
 
       if (Number(readStatCard) === Number(totalStatCard) - 1) {
@@ -446,10 +435,8 @@ function addOne(value) {
         const finalStatNormal = Number(readStatNormal) + 1;
         const finalStatBooks = Number(completedBooks) + 1;
         card.querySelector('.book-card-stat-read').textContent = finalCardStat;
-        document.querySelector('.stat-only-completed-pages').textContent =
-          finalStatNormal;
-        document.querySelector('.stat-only-completed-books').textContent =
-          finalStatBooks;
+        document.querySelector('.stat-only-completed-pages').textContent = finalStatNormal;
+        document.querySelector('.stat-only-completed-books').textContent = finalStatBooks;
 
         myLibrary[cardNumber].completedPages = myLibrary[cardNumber].totalPages;
       } else if (Number(readStatCard) === Number(totalStatCard)) {
@@ -458,8 +445,7 @@ function addOne(value) {
         const finalCardStat = Number(readStatCard) + 1;
         const finalStatNormal = Number(readStatNormal) + 1;
         card.querySelector('.book-card-stat-read').textContent = finalCardStat;
-        document.querySelector('.stat-only-completed-pages').textContent =
-          finalStatNormal;
+        document.querySelector('.stat-only-completed-pages').textContent = finalStatNormal;
 
         const data = Number(myLibrary[cardNumber].completedPages) + 1;
         myLibrary[cardNumber].completedPages = data.toString();
@@ -489,13 +475,13 @@ function editCard(value) {
 
       const formBookName = bookFormEdit.querySelector('.text-pole1-edit input');
       const formBookAuthor = bookFormEdit.querySelector(
-        '.text-pole2-edit input'
+        '.text-pole2-edit input',
       );
       const formBookTotal = bookFormEdit.querySelector(
-        '.text-pole3-edit input'
+        '.text-pole3-edit input',
       );
       const formBookCompleted = bookFormEdit.querySelector(
-        '.text-pole4-edit input'
+        '.text-pole4-edit input',
       );
 
       formBookName.value = bookName.textContent;
@@ -510,7 +496,7 @@ function editCard(value) {
       const labelPercentageFocusEdit = '-20%';
       const labelPercentageNormalEdit = '32%';
       const cancelButtonEdit = document.querySelector(
-        '.book-form-cancel-edit button'
+        '.book-form-cancel-edit button',
       );
       const inputTitleEdit = document.querySelector('.text-pole1-edit input');
       const labelTitleEdit = document.querySelector('.text-pole1-edit label');
@@ -519,13 +505,13 @@ function editCard(value) {
       const inputTotalEdit = document.querySelector('.text-pole3-edit input');
       const labelTotalEdit = document.querySelector('.text-pole3-edit label');
       const inputCompletedEdit = document.querySelector(
-        '.text-pole4-edit input'
+        '.text-pole4-edit input',
       );
       const labelCompletedEdit = document.querySelector(
-        '.text-pole4-edit label'
+        '.text-pole4-edit label',
       );
       const submitButtonEdit = document.querySelector(
-        '.book-form-confirm-edit button'
+        '.book-form-confirm-edit button',
       );
       const checkboxEdit = document.querySelector('.text-pole5-edit input');
 
@@ -643,8 +629,7 @@ function editCard(value) {
 
       checkboxEdit.addEventListener('click', (event) => {
         if (checkboxEdit.checked) {
-          document.querySelector('.text-pole4-edit input').value =
-            document.querySelector('.text-pole3-edit input').value;
+          document.querySelector('.text-pole4-edit input').value = document.querySelector('.text-pole3-edit input').value;
         }
 
         if (document.querySelector('.text-pole3-edit input').value !== '') {
@@ -662,17 +647,17 @@ function editCard(value) {
 
       document.addEventListener('mousemove', (event) => {
         if (
-          document.querySelector('.text-pole4-edit input').value !=
-          document.querySelector('.text-pole3-edit input').value
+          document.querySelector('.text-pole4-edit input').value
+          != document.querySelector('.text-pole3-edit input').value
         ) {
           checkboxEdit.checked = false;
         }
 
         if (
-          document.querySelector('.text-pole4-edit input').value ===
-            document.querySelector('.text-pole3-edit input').value &&
-          (document.querySelector('.text-pole4-edit input').value != '' ||
-            document.querySelector('.text-pole3-edit input').value) != ''
+          document.querySelector('.text-pole4-edit input').value
+            === document.querySelector('.text-pole3-edit input').value
+          && (document.querySelector('.text-pole4-edit input').value != ''
+            || document.querySelector('.text-pole3-edit input').value) != ''
         ) {
           checkboxEdit.checked = true;
         }
@@ -685,7 +670,7 @@ function editCard(value) {
       // SUBMIT BUTTON
 
       const completedOld = book.querySelector(
-        '.book-card-stat-read'
+        '.book-card-stat-read',
       ).textContent;
       const totalOld = book.querySelector('.book-card-stat-total').textContent;
 
@@ -698,8 +683,8 @@ function editCard(value) {
         });
 
         if (
-          Number(document.querySelector('.text-pole3-edit input').value) <
-          Number(document.querySelector('.text-pole4-edit input').value)
+          Number(document.querySelector('.text-pole3-edit input').value)
+          < Number(document.querySelector('.text-pole4-edit input').value)
         ) {
           alert('You cannot read more pages than the book has');
           event.stopImmediatePropagation();
@@ -713,36 +698,32 @@ function editCard(value) {
           false;
         } else {
           const currentInputTotal = Number(
-            document.querySelector('.text-pole3-edit input').value
+            document.querySelector('.text-pole3-edit input').value,
           );
           const currentInputCompleted = Number(
-            document.querySelector('.text-pole4-edit input').value
+            document.querySelector('.text-pole4-edit input').value,
           );
 
           const totalStat = Number(
-            document.querySelector('.stat-only-total-pages').textContent
+            document.querySelector('.stat-only-total-pages').textContent,
           );
           const currentCardTotal = Number(totalPages.textContent);
 
           const currentCardTotalOld = Number(totalOld);
           const currentCardCompletedOld = Number(completedOld);
 
-          const totalResult =
-            totalStat + currentInputTotal - currentCardTotalOld;
+          const totalResult = totalStat + currentInputTotal - currentCardTotalOld;
 
-          document.querySelector('.stat-only-total-pages').textContent =
-            totalResult;
+          document.querySelector('.stat-only-total-pages').textContent = totalResult;
 
           const completedStat = Number(
-            document.querySelector('.stat-only-completed-pages').textContent
+            document.querySelector('.stat-only-completed-pages').textContent,
           );
           const currentCardCompleted = Number(completedPages.textContent);
 
-          const completedResult =
-            completedStat + currentInputCompleted - currentCardCompletedOld;
+          const completedResult = completedStat + currentInputCompleted - currentCardCompletedOld;
 
-          document.querySelector('.stat-only-completed-pages').textContent =
-            completedResult;
+          document.querySelector('.stat-only-completed-pages').textContent = completedResult;
 
           bookName.textContent = inputTitleEdit.value;
           bookAuthor.textContent = inputAuthorEdit.value;
@@ -755,50 +736,48 @@ function editCard(value) {
           myLibrary[cardNumber].totalPages = inputTotalEdit.value;
 
           if (
-            document.querySelector('.text-pole3-edit input').value ===
-            document.querySelector('.text-pole4-edit input').value
+            document.querySelector('.text-pole3-edit input').value
+            === document.querySelector('.text-pole4-edit input').value
           ) {
             const completedBooks = document.querySelector(
-              '.stat-only-completed-books'
+              '.stat-only-completed-books',
             ).textContent;
             const allBookCards = document.querySelectorAll('.book-card');
             const numberValue = value.getAttribute('data-card');
           }
 
           if (
-            document.querySelector('.text-pole3-edit input').value ===
-            document.querySelector('.text-pole4-edit input').value
+            document.querySelector('.text-pole3-edit input').value
+            === document.querySelector('.text-pole4-edit input').value
           ) {
             if (book.querySelector('.tick').style.backgroundColor !== 'green') {
               const completedBooks = document.querySelector(
-                '.stat-only-completed-books'
+                '.stat-only-completed-books',
               ).textContent;
               const finalCompletedBooks = Number(completedBooks) + 1;
-              document.querySelector('.stat-only-completed-books').textContent =
-                finalCompletedBooks;
+              document.querySelector('.stat-only-completed-books').textContent = finalCompletedBooks;
               const allBookCards = document.querySelectorAll('.book-card');
             }
 
             if (
-              Number(document.querySelector('.text-pole3-edit input').value) ===
-              Number(document.querySelector('.text-pole4-edit input').value)
+              Number(document.querySelector('.text-pole3-edit input').value)
+              === Number(document.querySelector('.text-pole4-edit input').value)
             ) {
               book.querySelector('.tick').style.backgroundColor = 'green';
             }
           }
 
           if (
-            Number(document.querySelector('.text-pole3-edit input').value) !==
-              Number(document.querySelector('.text-pole4-edit input').value) &&
-            book.querySelector('.tick').style.backgroundColor == 'green'
+            Number(document.querySelector('.text-pole3-edit input').value)
+              !== Number(document.querySelector('.text-pole4-edit input').value)
+            && book.querySelector('.tick').style.backgroundColor == 'green'
           ) {
             book.querySelector('.tick').style.backgroundColor = 'white';
             const completedBooks = document.querySelector(
-              '.stat-only-completed-books'
+              '.stat-only-completed-books',
             ).textContent;
             const finalCompletedBooks = Number(completedBooks) - 1;
-            document.querySelector('.stat-only-completed-books').textContent =
-              finalCompletedBooks;
+            document.querySelector('.stat-only-completed-books').textContent = finalCompletedBooks;
           }
 
           event.stopImmediatePropagation();
@@ -824,46 +803,42 @@ function removeCard(element) {
       // REMOVES BOOK TOTAL PAGES FROM STATS
 
       const currentTotalValue = Number(
-        currentTotal.querySelector('.book-card-stat-total').textContent
+        currentTotal.querySelector('.book-card-stat-total').textContent,
       ); // current card total
       const totalForm = Number(
-        document.querySelector('.stat-only-total-pages').textContent
+        document.querySelector('.stat-only-total-pages').textContent,
       ); // current total stats
-      document.querySelector('.stat-only-total-pages').textContent =
-        totalForm - currentTotalValue;
+      document.querySelector('.stat-only-total-pages').textContent = totalForm - currentTotalValue;
 
       // REMOVES BOOK COMPLETED PAGES FROM STATS
 
       const currentCompletedValue = Number(
-        currentTotal.querySelector('.book-card-stat-read').textContent
+        currentTotal.querySelector('.book-card-stat-read').textContent,
       ); // current card completed
       const completedForm = Number(
-        document.querySelector('.stat-only-completed-pages').textContent
+        document.querySelector('.stat-only-completed-pages').textContent,
       ); // current completed stats
-      document.querySelector('.stat-only-completed-pages').textContent =
-        completedForm - currentCompletedValue;
+      document.querySelector('.stat-only-completed-pages').textContent = completedForm - currentCompletedValue;
 
       // REMOVES BOOK TOTAL PAGES FROM STATS
 
       const totalBooksStat = Number(
-        document.querySelector('.stat-only-total-books').textContent
+        document.querySelector('.stat-only-total-books').textContent,
       );
       const totalBooksStatPlus = totalBooksStat - 1;
-      document.querySelector('.stat-only-total-books').textContent =
-        totalBooksStatPlus;
+      document.querySelector('.stat-only-total-books').textContent = totalBooksStatPlus;
 
       // REMOVES ONE BOOK FROM COMPLETED BOOKS STATS
 
       if (
-        card.querySelector('.book-card-stat-read').textContent ==
-        card.querySelector('.book-card-stat-total').textContent
+        card.querySelector('.book-card-stat-read').textContent
+        == card.querySelector('.book-card-stat-total').textContent
       ) {
         const completedBooksStat = document.querySelector(
-          '.stat-only-completed-books'
+          '.stat-only-completed-books',
         ).textContent;
         const result = completedBooksStat - 1;
-        document.querySelector('.stat-only-completed-books').textContent =
-          result;
+        document.querySelector('.stat-only-completed-books').textContent = result;
       }
 
       card.remove();
@@ -928,7 +903,7 @@ function loopThroughtArray(num) {
       .appendChild(document.createElement('p'))
       .classList.add('book-card-author-detail', 'text');
     const bookAuthorHeading = bookAuthor.querySelector(
-      '.book-card-author-detail'
+      '.book-card-author-detail',
     );
     bookAuthorHeading.textContent = myLibrary[i].author;
 
@@ -989,7 +964,7 @@ function loopThroughtArray(num) {
     for (let i = 0; i <= allBookCards.length - 1; i++) {
       allBookCards[i].setAttribute('data-card', [i]);
       const allBookCardsChildren = allBookCards[i].querySelectorAll(
-        '.book-card div, .book-card button, .book-card p, .book-card i, .book-card h2'
+        '.book-card div, .book-card button, .book-card p, .book-card i, .book-card h2',
       );
 
       allBookCardsChildren.forEach((child) => {
